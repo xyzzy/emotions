@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<html>
+<!--
+	@date 2020-09-10 21:55:54
+	For and dedicated to Peter
+-->
+<!--
+	MIT License
+
+	Copyright (c) 2020 xyzzy@rockingship.org
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+-->
+<head>
+	<meta charset="iso-8859-1">
+	<title>Emotions</title>
+	<script src="MooTools-Core-1.6.0.js" type="text/javascript"></script>
+	<style>
+		body {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: 0;
+			padding: 0;
+		}
+
+		textarea {
+			border: .1em solid black;
+			margin: .2em;
+			padding: .2em;
+			min-height: 100px;
+		}
+
+		#outcome {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+		}
+
+		#controls {
+			margin: 1em;
+		}
+
+		.preview {
+			border: .1em solid black;
+			margin: 0;
+		}
+		.error {
+			background-color: white;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+
+<canvas id="outcome"></canvas>
+
+<div id="controls">
+	<textarea id="myCode1" rows="5" cols="50">
+v=sin(x *10+time/55);
+</textarea>
+	<canvas id="myCanvas1" width="100" height="100" class="preview"></canvas>
+	<div id="myError1" class="error"></div>
+
+	<textarea id="myCode2" rows="5" cols="50">
+v= sin(
+10*(x*sin(time/77)+
+    y*cos(time/144)) + time/113)
+</textarea>
+	<canvas id="myCanvas2" width="100" height="100" class="preview"></canvas>
+	<div id="myError2" class="error"></div>
+
+	<textarea id="myCode3" rows="5" cols="50">
+let cx = x+.5*sin(time/200);
+let cy = y+.5*cos(time/131);
+v=sin(sqrt(   
+   100*(cx*cx+cy*cy)
+           )+time/57);
+</textarea>
+	<canvas id="myCanvas3" width="100" height="100" class="preview"></canvas>
+	<div id="myError3" class="error"></div>
+</div>
+
+<script type="text/javascript">
+
+	function EffectUI(myCode, myCanvas, myError) {
+		let that = this;
+
+		that.myCode = myCode;
+		that.myCanvas = myCanvas;
+		that.myError = myError;
+
+		that.w = that.myCanvas.width;
+		that.h = that.myCanvas.height;
+		that.ctx = that.myCanvas.getContext("2d");
+		that.img = that.ctx.getImageData(0, 0, that.w, that.h);
+
+		that.myCanvas.width = that.w;
+		that.myCanvas.height = that.h;
+
+		// load initial code
+		that.code = myCode.value;
+
+		// install a listener
+		that.myCode.addEvent('input', function () {
+			let code = that.myCode.value;
+
+			// strip tags and newline
+			code = code.stripTags();
+			code = code.replace(/(\r\n|\n|\r)/gm, " ");
+			code = code.trim();
+
+			// test if code works
+			let w = 1, h = 1, x = 0, y = 0, time = 0;
+			let cos = Math.cos, sin = Math.sin, tan = Math.tan, sqrt = Math.sqrt, PI = Math.PI;
+			try {
+				eval('function F() { \'use strict\'; ' +
+					'let w=1, h=1, x=0, y=0, time=window.time; ' +
+					'let cos=Math.cos, sin=Math.sin, tan=Math.tan, sqrt=Math.sqrt, PI=Math.PI;' +
+					'let v=0, _x, _y, _i=0, _d=that.img.data; ' +
+					'for (_y=0; _y<h; _y++) for (_x=0; _x<w; _x++) { x=_x; y=_y; ' +
+					code +
+					'; }} F(); ');
+			} catch (e) {
+				// catch error
+				if (e instanceof SyntaxError) {
+					that.myError.set('text', e);
+				} else if (e instanceof ReferenceError) {
+					that.myError.set('text', e);
+				} else if (e instanceof TypeError) {
+					that.myError.set('text', e);
+				} else {
+					// unexpected error
+					throw(e);
+				}
+				return;
+			}
+
+			// code ok, store
+			that.code = code;
+			// clear error
+			that.myError.set('text', '');
+		});
+
+		that.tick = function (time) {
+			if (that.code == '') {
+				that.ctx.clearRect(0, 0, that.w, that.h);
+				return;
+			}
+
+			// run code
+			try {
+				let w = that.w, h = that.h;
+				let cos = Math.cos, sin = Math.sin, tan = Math.tan, sqrt = Math.sqrt, PI = Math.PI;
+				let time = window.time;
+				let _d = that.img.data;
+				let _x0 = -0.5, _dx = 1/w, _y0 = -0.5, _dy = 1/h;
+
+				eval('function F() { \'use strict\'; ' +
+					'let v=0, _i=0; ' +
+					'let x, _x, y, _y; ' +
+					'for (_y=0, y=_y0; _y<h; _y++, y+=_dy) { for (_x=0, x=_x0; _x<w; _x++, x+=_dx) { ' +
+					that.code +
+					'; v=Math.round(128+128*v); _d[_i++]=v; _d[_i++]=v; _d[_i++]=v; _d[_i++]=255; }}} F(); ');
+
+				// update image
+				that.ctx.putImageData(that.img, 0, 0);
+			} catch (e) {
+				// catch error
+				if (e instanceof SyntaxError) {
+					that.myError.set('text', e);
+				} else if (e instanceof ReferenceError) {
+					that.myError.set('text', e);
+				} else {
+					// unexpected error
+					throw(e);
+				}
+			}
+		}
+	}
+
+	window.addEvent('domready', function () {
+
+		/*
+		 * Hook into DOM
+		 */
+		let effect1 = new EffectUI(document.id('myCode1'), document.id('myCanvas1'), document.id('myError1'));
+		let effect2 = new EffectUI(document.id('myCode2'), document.id('myCanvas2'), document.id('myError2'));
+		let effect3 = new EffectUI(document.id('myCode3'), document.id('myCanvas3'), document.id('myError3'));
+		let outcome = document.id('outcome');
+		let numPixels = 100000;
+		
+		window.time = 0;
+		
+		itimer = window.setInterval(function () {
+			effect1.tick();
+		}, 100);
+		itimer = window.setInterval(function () {
+			effect2.tick();
+		}, 100);
+		itimer = window.setInterval(function () {
+			effect3.tick();
+		}, 100);
+
+		/*
+		 * Create internal render rectangle, the outcome canvas.
+		 */
+		
+		let bodyWidth = document.body.clientWidth;
+		let bodyHeight = document.body.clientHeight;
+
+		// internal size of a rectangle with screen aspect ratio that holds about the pixels
+		let aspect = bodyWidth / bodyHeight;
+		let outcomeH = Math.round(Math.sqrt(numPixels / aspect));
+		let outcomeW = Math.round(numPixels / outcomeH);
+
+		// signal canvas to update imagedata
+		outcome.width = outcomeW;
+		outcome.height = outcomeH;
+
+		let ctx = outcome.getContext("2d");
+		let img = ctx.getImageData(0, 0, outcomeW, outcomeH);
+
+		/*
+		 * generate the palette
+		 */
+		let palr = new Array(256);
+		let palg = new Array(256);
+		let palb = new Array(256);
+		for (x = 0; x < 256; x++) {
+			palr[x] = Math.round(128.0 + 128 * Math.sin(Math.PI * x / 32.0));
+			palg[x] = Math.round(128.0 + 128 * Math.sin(Math.PI * x / 64.0));
+			palb[x] = Math.round(128.0 + 128 * Math.sin(Math.PI * x / 128.0));
+		}
+
+		/*
+		 * Draw/paint outcome. CPU intensive!
+		 */
+		itimer = window.setInterval(function () {
+
+			/*
+			 * Script preamble
+			 */
+			let w = outcomeW, h = outcomeH;
+			let cos = Math.cos, sin = Math.sin, tan = Math.tan, sqrt = Math.sqrt, PI = Math.PI;
+			let time = window.time;
+			let _d = img.data;
+			let _x0 = -0.5, _dx = 1/w, _y0 = -0.5, _dy = 1/h;
+
+			if (w > outcomeH) {
+				_x0 *= aspect;
+				_dx *= aspect;
+			} else {
+				_y0 /= aspect;
+				_dy /= aspect;
+			}
+
+			let code = 'function F() { \'use strict\'; ' +
+				'let v=0, _i=0, _v1=0, _v2=0, _v3=0; ' +
+				'let _r, _g, _b; ' +
+				'let x, _x, y, _y; ' +
+				'for (_y=0, y=_y0; _y<h; _y++, y+=_dy) { for (_x=0, x=_x0; _x<w; _x++, x+=_dx) { ';
+
+			/*
+			 * Inject (sanitised) effect snippets
+			 */
+			let n = 0;
+			if (effect1.code) {
+				code += effect1.code + '; _v1=v;';
+				n++;
+			}
+			if (effect2.code) {
+				code += effect2.code + '; _v2=v;';
+				n++;
+			}
+			if (effect3.code) {
+				code += effect3.code + '; _v3=v;';
+				n++;
+			}
+
+			/*
+			 * Postamble
+			 */
+			code += ';v=Math.round(128+127*(_v1+_v2+_v3)/' + n + ');' +
+				'_r=palr[Math.round(v)];' +
+				'_g=palg[Math.round(v)];' +
+				'_b=palb[Math.round(v)];' +
+				'_d[_i++]=_r; _d[_i++]=_g; _d[_i++]=_b; _d[_i++]=255; }}} F(); ';
+
+			/*
+			 * Execute
+			 */
+			try {
+				eval(code);
+
+				// update image
+				ctx.putImageData(img, 0, 0);
+			} catch (e) {
+				// catch error
+				if (e instanceof SyntaxError) {
+					alert(e);
+					// that.myError.set('text', e);
+				} else if (e instanceof ReferenceError) {
+					alert(e);
+					// that.myError.set('text', e);
+				} else {
+					// unexpected error
+					throw(e);
+				}
+			}
+
+			/*
+			 * Bump global timer
+			 */ 
+			window.time += 3;
+		}, 30);
+
+		/*
+		 * resize internal rectangle when client window changes (switching landscape/portrait mode)
+		 */
+		window.addEvent('resize', function () {
+			let bodyWidth = document.body.clientWidth;
+			let bodyHeight = document.body.clientHeight;
+
+			// internal size of a rectangle with screen aspect ratio that holds about the pixels
+			aspect = bodyWidth / bodyHeight;
+			outcomeH = Math.round(Math.sqrt(numPixels / aspect));
+			outcomeW = Math.round(numPixels / outcomeH);
+
+			// signal canvas to update imagedata
+			outcome.width = outcomeW;
+			outcome.height = outcomeH;
+
+			ctx = outcome.getContext("2d");
+			img = ctx.getImageData(0, 0, outcomeW, outcomeH);
+		});
+	});
+
+</script>
+
+</body>
+</html>
