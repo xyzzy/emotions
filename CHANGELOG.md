@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+```
+2020-09-15 22:16:00 Let `docs/index.html` point to `emotions.html`.
+```
+
 ## Release 1.0.0 2020-09-15 13:34:00
 
 For and dedicated to Peter.

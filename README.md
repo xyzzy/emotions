@@ -1,10 +1,10 @@
 # Welcome to Emotions
 
-Interactive demoscene artwork for and dedicated to Peter.
+Interactive demoscene lava artwork for and dedicated to Peter.
 
 You can change the formula, just edit them in the appropriate boxes.
 
-[Try it here](https://xyzzy.github.io/emotions/emotions.html)
+[Try it here](https://xyzzy.github.io/emotions)
 
 # Versioning
 
