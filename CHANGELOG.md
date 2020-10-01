@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ```
+2020-10-01 10:47:52 Move GitHub-pages to project root.
 2020-09-15 22:16:00 Let `docs/index.html` point to `emotions.html`.
 ```
 
@@ -18,3 +19,5 @@ For and dedicated to Peter.
 ```
 2020-09-15 13:34:00 Initial commit.
 ```
+
+[Unreleased]: https://github.com/xyzzy/emotions/compare/v1.0.0...HEAD
