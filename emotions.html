@@ -249,10 +249,10 @@ v=sin(sqrt(
 		let palr = new Array(256);
 		let palg = new Array(256);
 		let palb = new Array(256);
-		for (x = 0; x < 256; x++) {
-			palr[x] = Math.round(128.0 + 128 * Math.sin(Math.PI * x / 32.0));
-			palg[x] = Math.round(128.0 + 128 * Math.sin(Math.PI * x / 64.0));
-			palb[x] = Math.round(128.0 + 128 * Math.sin(Math.PI * x / 128.0));
+		for (let i = 0; i < 256; i++) {
+			palr[i] = Math.round(128.0 + 128 * Math.sin(Math.PI * i / 32.0));
+			palg[i] = Math.round(128.0 + 128 * Math.sin(Math.PI * i / 64.0));
+			palb[i] = Math.round(128.0 + 128 * Math.sin(Math.PI * i / 128.0));
 		}
 
 		/*
@@ -304,10 +304,7 @@ v=sin(sqrt(
 			 * Postamble
 			 */
 			code += ';v=Math.round(128+127*(_v1+_v2+_v3)/' + n + ');' +
-				'_r=palr[Math.round(v)];' +
-				'_g=palg[Math.round(v)];' +
-				'_b=palb[Math.round(v)];' +
-				'_d[_i++]=_r; _d[_i++]=_g; _d[_i++]=_b; _d[_i++]=255; }}} F(); ';
+				'_d[_i++]=palr[v]; _d[_i++]=palg[v]; _d[_i++]=palb[v]; _d[_i++]=255; }}} F(); ';
 
 			/*
 			 * Execute
