@@ -6,7 +6,7 @@ You can change the formula, just edit them in the appropriate boxes.
 
 Try it here: https://xyzzy.github.io/emotions
 
-![PREVIEW](preview.png)
+[![PREVIEW](preview.png)](https://xyzzy.github.io/emotions)
 
 # Versioning
 
