@@ -30,7 +30,6 @@
 <head>
 	<meta charset="iso-8859-1">
 	<title>Emotions</title>
-	<script src="MooTools-Core-1.6.0.js" type="text/javascript"></script>
 	<style>
 		body {
 			position: absolute;
@@ -124,11 +123,11 @@ v=sin(sqrt(
 		that.code = myCode.value;
 
 		// install a listener
-		that.myCode.addEvent('input', function () {
+		that.myCode.addEventListener("input", function () {
 			let code = that.myCode.value;
 
 			// strip tags and newline
-			code = code.stripTags();
+			code = code.replace(/(<([^>]+)>)/gi, "");
 			code = code.replace(/(\r\n|\n|\r)/gm, " ");
 			code = code.trim();
 
@@ -146,11 +145,11 @@ v=sin(sqrt(
 			} catch (e) {
 				// catch error
 				if (e instanceof SyntaxError) {
-					that.myError.set('text', e);
+					that.myError.innerHTML = e;
 				} else if (e instanceof ReferenceError) {
-					that.myError.set('text', e);
+					that.myError.innerHTML = e;
 				} else if (e instanceof TypeError) {
-					that.myError.set('text', e);
+					that.myError.innerHTML = e;
 				} else {
 					// unexpected error
 					throw(e);
@@ -161,7 +160,7 @@ v=sin(sqrt(
 			// code ok, store
 			that.code = code;
 			// clear error
-			that.myError.set('text', '');
+			that.myError.innerHTML = "";
 		});
 
 		that.tick = function (time) {
@@ -190,9 +189,9 @@ v=sin(sqrt(
 			} catch (e) {
 				// catch error
 				if (e instanceof SyntaxError) {
-					that.myError.set('text', e);
+					that.myError.innerHTML = e;
 				} else if (e instanceof ReferenceError) {
-					that.myError.set('text', e);
+					that.myError.innerHTML = e;
 				} else {
 					// unexpected error
 					throw(e);
@@ -201,15 +200,24 @@ v=sin(sqrt(
 		}
 	}
 
-	window.addEvent('domready', function () {
+	window.addEventListener("DOMContentLoaded", function () {
 
 		/*
 		 * Hook into DOM
 		 */
-		let effect1 = new EffectUI(document.id('myCode1'), document.id('myCanvas1'), document.id('myError1'));
-		let effect2 = new EffectUI(document.id('myCode2'), document.id('myCanvas2'), document.id('myError2'));
-		let effect3 = new EffectUI(document.id('myCode3'), document.id('myCanvas3'), document.id('myError3'));
-		let outcome = document.id('outcome');
+		let dom = {
+			myCode1: 0, myCanvas1: 0, myError1: 0,
+			myCode2: 0, myCanvas2: 0, myError2: 0,
+			myCode3: 0, myCanvas3: 0, myError3: 0,
+			outcome: 0,
+		};
+		for (tag in dom)
+			dom[tag] = document.getElementById(tag);
+
+		let effect1 = new EffectUI(dom.myCode1, dom.myCanvas1, dom.myError1);
+		let effect2 = new EffectUI(dom.myCode2, dom.myCanvas2, dom.myError2);
+		let effect3 = new EffectUI(dom.myCode3, dom.myCanvas3, dom.myError3);
+		let outcome = dom.outcome;
 		let numPixels = 100000;
 		
 		window.time = 0;
@@ -318,10 +326,10 @@ v=sin(sqrt(
 				// catch error
 				if (e instanceof SyntaxError) {
 					alert(e);
-					// that.myError.set('text', e);
+					// that.myError.innerHTML = e;
 				} else if (e instanceof ReferenceError) {
 					alert(e);
-					// that.myError.set('text', e);
+					// that.myError.innerHTML = e;
 				} else {
 					// unexpected error
 					throw(e);
@@ -337,7 +345,7 @@ v=sin(sqrt(
 		/*
 		 * resize internal rectangle when client window changes (switching landscape/portrait mode)
 		 */
-		window.addEvent('resize', function () {
+		window.addEventListener("resize", function () {
 			let bodyWidth = document.body.clientWidth;
 			let bodyHeight = document.body.clientHeight;
 
