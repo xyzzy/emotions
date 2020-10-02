@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ```
+2020-10-02 12:44:17 Consistent quotes.
 2020-10-02 12:42:46 Dropped mootools.
 2020-10-02 12:00:10 Added preview.
 ```

@@ -135,13 +135,13 @@ v=sin(sqrt(
 			let w = 1, h = 1, x = 0, y = 0, time = 0;
 			let cos = Math.cos, sin = Math.sin, tan = Math.tan, sqrt = Math.sqrt, PI = Math.PI;
 			try {
-				eval('function F() { \'use strict\'; ' +
-					'let w=1, h=1, x=0, y=0, time=window.time; ' +
-					'let cos=Math.cos, sin=Math.sin, tan=Math.tan, sqrt=Math.sqrt, PI=Math.PI;' +
-					'let v=0, _x, _y, _i=0, _d=that.img.data; ' +
-					'for (_y=0; _y<h; _y++) for (_x=0; _x<w; _x++) { x=_x; y=_y; ' +
+				eval("function F() { \"use strict\"; " +
+					"let w=1, h=1, x=0, y=0, time=window.time; " +
+					"let cos=Math.cos, sin=Math.sin, tan=Math.tan, sqrt=Math.sqrt, PI=Math.PI;" +
+					"let v=0, _x, _y, _i=0, _d=that.img.data; " +
+					"for (_y=0; _y<h; _y++) for (_x=0; _x<w; _x++) { x=_x; y=_y; " +
 					code +
-					'; }} F(); ');
+					"; }} F(); ");
 			} catch (e) {
 				// catch error
 				if (e instanceof SyntaxError) {
@@ -164,7 +164,7 @@ v=sin(sqrt(
 		});
 
 		that.tick = function (time) {
-			if (that.code == '') {
+			if (that.code === "") {
 				that.ctx.clearRect(0, 0, that.w, that.h);
 				return;
 			}
@@ -177,12 +177,12 @@ v=sin(sqrt(
 				let _d = that.img.data;
 				let _x0 = -0.5, _dx = 1/w, _y0 = -0.5, _dy = 1/h;
 
-				eval('function F() { \'use strict\'; ' +
-					'let v=0, _i=0; ' +
-					'let x, _x, y, _y; ' +
-					'for (_y=0, y=_y0; _y<h; _y++, y+=_dy) { for (_x=0, x=_x0; _x<w; _x++, x+=_dx) { ' +
+				eval("function F() { \"use strict\"; " +
+					"let v=0, _i=0; " +
+					"let x, _x, y, _y; " +
+					"for (_y=0, y=_y0; _y<h; _y++, y+=_dy) { for (_x=0, x=_x0; _x<w; _x++, x+=_dx) { " +
 					that.code +
-					'; v=Math.round(128+128*v); _d[_i++]=v; _d[_i++]=v; _d[_i++]=v; _d[_i++]=255; }}} F(); ');
+					"; v=Math.round(128+128*v); _d[_i++]=v; _d[_i++]=v; _d[_i++]=v; _d[_i++]=255; }}} F(); ");
 
 				// update image
 				that.ctx.putImageData(that.img, 0, 0);
@@ -285,34 +285,34 @@ v=sin(sqrt(
 				_dy /= aspect;
 			}
 
-			let code = 'function F() { \'use strict\'; ' +
-				'let v=0, _i=0, _v1=0, _v2=0, _v3=0; ' +
-				'let _r, _g, _b; ' +
-				'let x, _x, y, _y; ' +
-				'for (_y=0, y=_y0; _y<h; _y++, y+=_dy) { for (_x=0, x=_x0; _x<w; _x++, x+=_dx) { ';
+			let code = "function F() { \"use strict\"; " +
+				"let v=0, _i=0, _v1=0, _v2=0, _v3=0; " +
+				"let _r, _g, _b; " +
+				"let x, _x, y, _y; " +
+				"for (_y=0, y=_y0; _y<h; _y++, y+=_dy) { for (_x=0, x=_x0; _x<w; _x++, x+=_dx) { ";
 
 			/*
 			 * Inject (sanitised) effect snippets
 			 */
 			let n = 0;
 			if (effect1.code) {
-				code += effect1.code + '; _v1=v;';
+				code += effect1.code + "; _v1=v;";
 				n++;
 			}
 			if (effect2.code) {
-				code += effect2.code + '; _v2=v;';
+				code += effect2.code + "; _v2=v;";
 				n++;
 			}
 			if (effect3.code) {
-				code += effect3.code + '; _v3=v;';
+				code += effect3.code + "; _v3=v;";
 				n++;
 			}
 
 			/*
 			 * Postamble
 			 */
-			code += ';v=Math.round(128+127*(_v1+_v2+_v3)/' + n + ');' +
-				'_d[_i++]=palr[v]; _d[_i++]=palg[v]; _d[_i++]=palb[v]; _d[_i++]=255; }}} F(); ';
+			code += ";v=Math.round(128+127*(_v1+_v2+_v3)/" + n + ");" +
+				"_d[_i++]=palr[v]; _d[_i++]=palg[v]; _d[_i++]=palb[v]; _d[_i++]=255; }}} F(); ";
 
 			/*
 			 * Execute
