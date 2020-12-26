@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <!--
 	@date 2020-09-10 21:55:54
 	For and dedicated to Peter
@@ -28,8 +28,24 @@
 	SOFTWARE.
 -->
 <head>
-	<meta charset="iso-8859-1">
+	<meta charset="UTF-8">
 	<title>Emotions</title>
+	<meta name="description" content="Interactive lava artwork">
+	<link rel="shortcut icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+	<link rel="shortcut icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+	<link rel="shortcut icon" type="image/png" sizes="160x160" href="assets/favicon-160.png">
+	<link rel="shortcut icon" type="image/png" sizes="196x196" href="assets/favicon-196.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="160x160" href="assets/favicon-160.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="196x196" href="assets/favicon-196.png">
+	<meta property="og:url" content="https://xyzzy.github.io/emotions"/>
+	<meta property="og:title" content="Emotions"/>
+	<meta property="og:description" content="Interactive lava artwork">
+	<meta property="og:image" content="/emotions/assets/favimage-480x270.jpg">
+	<meta property="og:type" content="website"/>
+	<meta property="og:locale" content="en_GB"/>
+
 	<style>
 		body {
 			position: absolute;
@@ -66,6 +82,7 @@
 			border: .1em solid black;
 			margin: 0;
 		}
+
 		.error {
 			background-color: white;
 			color: red;
@@ -197,7 +214,7 @@ v=sin(sqrt(
 					throw(e);
 				}
 			}
-		}
+		};
 	}
 
 	window.addEventListener("DOMContentLoaded", function () {
@@ -219,9 +236,9 @@ v=sin(sqrt(
 		let effect3 = new EffectUI(dom.myCode3, dom.myCanvas3, dom.myError3);
 		let outcome = dom.outcome;
 		let numPixels = 100000;
-		
+
 		window.time = 0;
-		
+
 		itimer = window.setInterval(function () {
 			effect1.tick();
 		}, 100);
@@ -235,7 +252,7 @@ v=sin(sqrt(
 		/*
 		 * Create internal render rectangle, the outcome canvas.
 		 */
-		
+
 		let bodyWidth = document.body.clientWidth;
 		let bodyHeight = document.body.clientHeight;
 
@@ -338,7 +355,7 @@ v=sin(sqrt(
 
 			/*
 			 * Bump global timer
-			 */ 
+			 */
 			window.time += 3;
 		}, 30);
 
