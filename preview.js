@@ -28,8 +28,8 @@
 const nodeCanvas = require("canvas");
 const fs = require("fs")
 
-const width = 320;
-const height = 180;
+const width = 840;
+const height = 472;
 
 /*
  * create the canvas
@@ -109,5 +109,5 @@ ctx.putImageData(img, 0, 0);
 /*
  * save
  */
-let buffer = canvas.toBuffer('image/png')
-fs.writeFileSync('preview.png', buffer)
+let buffer = canvas.toBuffer('image/jpeg')
+fs.writeFileSync('preview-840x472.jpeg', buffer)
