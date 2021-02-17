@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Version [1.2.0] 2021-02-16 21:28:12
+
 ```
 2021-02-16 21:23:36 Changed: Updated preview.
 2021-02-16 21:21:02 Changed: Updated open graph.
@@ -32,5 +34,6 @@ For and dedicated to Peter.
 2020-09-15 13:34:00 Initial commit.
 ```
 
-[Unreleased]: https://github.com/xyzzy/emotions/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/xyzzy/emotions/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/xyzzy/emotions/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/xyzzy/emotions/compare/v1.0.0...v1.1.0
