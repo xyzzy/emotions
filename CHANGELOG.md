@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ```
+2021-02-16 21:23:36 Changed: Updated preview.
 2021-02-16 21:21:02 Changed: Updated open graph.
 2021-02-16 21:09:00 Changed: Undo symlink `index.html`.
 2020-12-26 02:19:39 Added: favicon/favimage.
