@@ -1,7 +1,7 @@
 /*
  *	MIT License
  *
- *	Copyright (c) 2020 xyzzy@rockingship.org
+ *	Copyright (c) 2020 xyzzy@RockingShip.org
  *
  *	Permission is hereby granted, free of charge, to any person obtaining a copy
  *	of this software and associated documentation files (the "Software"), to deal
@@ -109,5 +109,5 @@ ctx.putImageData(img, 0, 0);
 /*
  * save
  */
-let buffer = canvas.toBuffer('image/jpeg')
-fs.writeFileSync('preview-840x472.jpeg', buffer)
+let buffer = canvas.toBuffer('image/jpeg');
+fs.writeFileSync('preview-' + width + 'x' + height + '.jpeg', buffer);
