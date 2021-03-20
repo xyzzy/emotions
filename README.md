@@ -1,13 +1,27 @@
-[![PREVIEW](assets/preview-840x472.jpeg)](https://xyzzy.github.io/emotions)  
-\[Click on image to jump to the interactive demonstration\]
+---
+layout: home
+title: "emotions - Interactive lava lamp art"
+image: assets/favimage-840x472.jpg
+---
+
+\[click on image to start to the interactive demonstration\]  
+[![preview](assets/favimage-840x472.jpg)](https://xyzzy.github.io/emotions/)
 
 # Emotions
 
-## Welcome to the Wonderful World of shader rendering
+Interactive demoscene lava artwork dedicated to Peter.
 
-Interactive demoscene lava artwork for and dedicated to Peter.
+### Welcome to the Wonderful World of shader rendering
 
-You can change the formula, just edit them in the appropriate boxes.
+You can change the formulas, just edit them in the appropriate boxes.
+
+## Source code
+
+Grab one of the tarballs at [https://github.com/xyzzy/emotions/releases](https://github.com/xyzzy/emotions/releases) or checkout the latest code:
+
+```sh
+        git clone https://github.com/xyzzy/emotions.git
+```
 
 ## Versioning
 
@@ -15,4 +29,4 @@ Using [SemVer](http://semver.org/) for versioning. For the versions available, s
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details

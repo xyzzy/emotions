@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## Version [1.2.0] 2021-02-16 21:28:12
+```
+2021-03-17 19:41:05 Added: `moonwalk` theme.
+```
+
+## 2021-02-16 21:28:12 [Version 1.2.0]
 
 ```
 2021-02-16 21:23:36 Changed: Updated preview.
@@ -19,21 +23,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 2020-10-02 12:00:10 Added: preview.
 ```
 
-## Release [1.1.0] 2020-10-01 10:54:57
+## 2020-10-01 10:54:57 [Version 1.1.0]
 
 ```
 2020-10-01 10:47:52 Move GitHub-pages to project root.
 2020-09-15 22:16:00 Let `docs/index.html` point to `emotions.html`.
 ```
 
-## Release 1.0.0 2020-09-15 13:34:00
+## 2020-09-15 13:34:00 Version 1.0.0
 
-For and dedicated to Peter.
+Dedicated to Peter.
 
 ```
 2020-09-15 13:34:00 Initial commit.
 ```
 
 [Unreleased]: https://github.com/xyzzy/emotions/compare/v1.2.0...HEAD
-[1.2.0]: https://github.com/xyzzy/emotions/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/xyzzy/emotions/compare/v1.0.0...v1.1.0
+[Version 1.2.0]: https://github.com/xyzzy/emotions/compare/v1.1.0...v1.2.0
+[Version 1.1.0]: https://github.com/xyzzy/emotions/compare/v1.0.0...v1.1.0
