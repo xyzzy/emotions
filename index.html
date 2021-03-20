@@ -1,53 +1,54 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-<!--
-	@date 2020-09-10 21:55:54
-	For and dedicated to Peter
--->
-<!--
-	MIT License
-
-	Copyright (c) 2020 xyzzy@rockingship.org
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in all
-	copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	SOFTWARE.
--->
 <head>
 	<meta charset="UTF-8">
+
+	<!--
+	 *  MIT License
+	 *
+	 *  Copyright (c) 2020 xyzzy@RockingShip.org
+	 *
+	 *  Permission is hereby granted, free of charge, to any person obtaining a copy
+	 *  of this software and associated documentation files (the "Software"), to deal
+	 *  in the Software without restriction, including without limitation the rights
+	 *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 *  copies of the Software, and to permit persons to whom the Software is
+	 *  furnished to do so, subject to the following conditions:
+	 *
+	 *  The above copyright notice and this permission notice shall be included in all
+	 *  copies or substantial portions of the Software.
+	 *
+	 *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	 *  SOFTWARE.
+	-->
+	<!--
+		@date 2020-09-10 21:55:54
+		Dedicated to Peter
+	-->
+
 	<title>Emotions</title>
-	<meta name="description" content="Interactive lava artwork">
-	<link rel="shortcut icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-	<link rel="shortcut icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
-	<link rel="shortcut icon" type="image/png" sizes="160x160" href="assets/favicon-160.png">
-	<link rel="shortcut icon" type="image/png" sizes="196x196" href="assets/favicon-196.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="160x160" href="assets/favicon-160.png">
-	<link rel="apple-touch-icon" type="image/png" sizes="196x196" href="assets/favicon-196.png">
 	<meta property="og:title" content="Emotions">
-	<meta property="og:description" content="Interactive lava artwork">
+	<meta name="description" content="Interactive lava lamp art">
+	<meta property="og:description" content="Interactive lava lamp art">
+	<link rel="shortcut icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+	<link rel="shortcut icon" type="image/png" sizes="152x152" href="assets/favicon-152.png">
+	<link rel="shortcut icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="assets/favicon-152.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+	<meta property="og:url" content="https://xyzzy.github.io/emotions/index.html">
+	<meta property="og:image" content="https://xyzzy.github.io/emotions/assets/favimage-840x472.jpg">
 	<meta property="og:type" content="website">
 	<meta property="og:locale" content="en_GB">
-	<meta property="og:url" content="https://xyzzy.github.io/emotions">
-	<meta property="og:image" content="https://xyzzy.github.io/emotions/assets/favimage-480x270.jpg">
-	<meta property="og:image:type" content="image/jpeg">
-	<meta property="og:image:width" content="480">
-	<meta property="og:image:height" content="270">
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:title" content="Emotions - Interactive lava lamp art" />
+	<meta property="twitter:image" content="https://xyzzy.github.io/emotions/assets/favimage-840x472.jpg" />
+
 	<style>
 		body {
 			position: absolute;
@@ -59,6 +60,7 @@
 			left: 0;
 			margin: 0;
 			padding: 0;
+			font-family: Verdana, Geneva, sans-serif;
 		}
 
 		textarea {
@@ -88,6 +90,30 @@
 		.error {
 			background-color: white;
 			color: red;
+		}
+
+		/*
+		 * top=0,bottom=0,margin=auto to vertically align
+		 * left=0,right=auto,margin=auto,width=auto to determine width. then
+		 * left=0,right=0,margin=auto,width=<width> to horizontally align
+		 */
+		#idPopupWrapper {
+			position: absolute;
+			margin: auto;
+			bottom: 1em;
+			right: 1em;
+			text-align: center;
+		}
+
+		#idPopup {
+			opacity: 0.5;
+			display: inline-block;
+			padding: 0.5em;
+			border: .1em solid #000;
+			border-radius: .5em;
+			background-color: #fff;
+			color: #000;
+			white-space: nowrap;
 		}
 	</style>
 </head>
@@ -144,7 +170,7 @@ v=sin(sqrt(
 		// install a listener
 		that.myCode.addEventListener("input", function () {
 			let code = that.myCode.value;
-
+png
 			// strip tags and newline
 			code = code.replace(/(<([^>]+)>)/gi, "");
 			code = code.replace(/(\r\n|\n|\r)/gm, " ");
@@ -219,7 +245,7 @@ v=sin(sqrt(
 		};
 	}
 
-	window.addEventListener("DOMContentLoaded", function () {
+	window.addEventListener("load", function () {
 
 		/*
 		 * Hook into DOM
@@ -383,6 +409,8 @@ v=sin(sqrt(
 	});
 
 </script>
+
+<div id="idPopupWrapper"><a href="https://github.com/xyzzy/emotions"><div id="idPopup">emotions@github</div></a></div>
 
 </body>
 </html>

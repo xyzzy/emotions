@@ -5,7 +5,7 @@ image: assets/favimage-840x472.jpg
 ---
 
 \[click on image to start to the interactive demonstration\]  
-[![preview](assets/favimage-840x472.jpg)](https://xyzzy.github.io/emotions/)
+[![teaser](assets/favimage-840x472.jpg)](https://xyzzy.github.io/emotions/)
 
 # Emotions
 
