@@ -5,11 +5,13 @@ image: assets/favimage-840x472.jpg
 ---
 
 \[click on image to start to the interactive demonstration\]  
-[![teaser](assets/favimage-840x472.jpg)](https://xyzzy.github.io/emotions/)
+[![teaser](assets/favimage-840x472.jpg)](https://xyzzy.github.io/emotions)
 
 # Emotions
 
-Interactive demoscene lava artwork dedicated to Peter.
+Interactive demoscene lava artwork dedicated to Peter
+
+Try the demonstration here: [https://xyzzy.github.io/emotions/](https://xyzzy.github.io/emotions)
 
 ### Welcome to the Wonderful World of shader rendering
 
@@ -20,7 +22,7 @@ You can change the formulas, just edit them in the appropriate boxes.
 Grab one of the tarballs at [https://github.com/xyzzy/emotions/releases](https://github.com/xyzzy/emotions/releases) or checkout the latest code:
 
 ```sh
-        git clone https://github.com/xyzzy/emotions.git
+  git clone https://github.com/xyzzy/emotions.git
 ```
 
 ## Versioning
